@@ -8,19 +8,24 @@ pseudocode with respect to the input size n of each of the following:
 ```
 python
 a)  a = 0 #O(1)
-    while (a < n * n * n): 
-      a = a + n * n
+    while (a < n * n * n): #O(n^3)
+      a = a + n * n #O(1)
 ```
+Line 1 and 3 are constants 
+Line 2 while loop will run n^3 more times.Will get big very quick as n increases.
+Quadratic Time complexity because of the O(n^3). 
 
 
 ```
-b)  sum = 0
-    for i in range(n):
-      j = 1
-      while j < n:
+b)  sum = 0 #O(1)
+    for i in range(n): 
+      j = 1 #O(1)
+      while j < n: 
         j *= 2
         sum += 1
+
 ```
+O(n), because as n increases by 1 the loop will run n more times
 
 ```
 c)  def bunnyEars(bunnies): #O(n)
@@ -55,5 +60,14 @@ for i in eggs:
   if thrown < f:
     return x 
 
-  We can throw the first egg off a n/2
-  if it breaks we can try (n/2)/2 
+Binary Search Strategy: 
+  We can throw the first egg off at n/2
+    if it breaks we can try (n/2)/2 
+      keep cutting in half until it does not break 
+      then go up by 1.5 the cur num until 
+
+    if it does not break we can try (n/2) * 1.5 
+      keep cutting in half up until the egg breaks 
+      then go down until it does not 
+  
+  O(log n) b/c we are cutting the possible answers in half every time (binary tree) so it will flatten out.
