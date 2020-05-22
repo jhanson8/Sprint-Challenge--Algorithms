@@ -9,6 +9,69 @@ class SortingRobot:
         self._light = "OFF"     # The state of the robot's light
         self._time = 0          # A time counter (stretch)
 
+    
+
+    #Space is O(1) b/c we do all of the sorting in place of same array 
+    #Time O(n^2) b/c we will loop through until sorted 
+    def sort(self):
+        """
+        Sort the robot's list.
+        """
+        #Fill this out
+        #We must first set the light to off. Equivalent to saying the list is not sorted.
+        self.set_light_off()
+        #While the list is not sorted we will tentatively assume that is is on this iteration. 
+        while not self.light_is_on():
+            self.set_light_on()
+
+            #This if statement will only run if the list is sorted. If not we will hit the while loops 
+            if self.light_is_on == True:
+                pass  
+
+            #15, 41, 58, 49
+            #41, 15, 58, 49
+            #While our pointer can move right on our list, 
+            while self.can_move_right() == True:
+                self.swap_item()
+                self.move_right()
+                if self.compare_item() == 1:
+                    self.swap_item() 
+                    self.set_light_off
+                
+                self.move_left()
+                self.swap_item()
+                self.move_right()
+
+            #if we can move left that means that the list is still not sorted 
+            #15, 41, 58, 49
+            #41, 15, 58, 49
+            while self.can_move_left():
+                self.swap_item()
+                self.move_left()
+
+                #if the cur item value is less than the one ahead going in left direction 
+                if self.compare_item() == -1:
+                    self.swap_item()
+                    self.set_light_off()
+                
+                self.move_right()
+                self.swap_item()
+                self.move_left()
+            
+            
+
+                #elif self.compare_item() == -1:
+                    #self.move_right()
+                #elif self.compare_item() == 0:
+                    #self.move_right()
+            
+
+        #return self.light_is_on()
+
+
+
+     
+    
     def can_move_right(self):
         """
         Returns True if the robot can move right or False if it's
@@ -91,13 +154,13 @@ class SortingRobot:
         Returns True if the robot's light is on and False otherwise.
         """
         return self._light == "ON"
+    
 
-    def sort(self):
-        """
-        Sort the robot's list.
-        """
-        # Fill this out
-        pass
+
+
+   
+
+        
 
 
 if __name__ == "__main__":
@@ -105,7 +168,7 @@ if __name__ == "__main__":
     # with `python robot_sort.py`
 
     l = [15, 41, 58, 49, 26, 4, 28, 8, 61, 60, 65, 21, 78, 14, 35, 90, 54, 5, 0, 87, 82, 96, 43, 92, 62, 97, 69, 94, 99, 93, 76, 47, 2, 88, 51, 40, 95, 6, 23, 81, 30, 19, 25, 91, 18, 68, 71, 9, 66, 1, 45, 33, 3, 72, 16, 85, 27, 59, 64, 39, 32, 24, 38, 84, 44, 80, 11, 73, 42, 20, 10, 29, 22, 98, 17, 48, 52, 67, 53, 74, 77, 37, 63, 31, 7, 75, 36, 89, 70, 34, 79, 83, 13, 57, 86, 12, 56, 50, 55, 46]
-
+   
     robot = SortingRobot(l)
 
     robot.sort()
