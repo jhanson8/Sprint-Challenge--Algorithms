@@ -9,10 +9,22 @@ class SortingRobot:
         self._light = "OFF"     # The state of the robot's light
         self._time = 0          # A time counter (stretch)
 
-    
+    #Bubble Sort 
+    #We must initially set the light to off to indicate the list is not sorted 
+    #While the list is not sorted, we will turn the light on and assume the list is sorted 
+    #While we are able to move right on the list 
+    #Use the compare function to look at the cur number and the one ahead 
+        #if the cur number is greater than the one ahead (retruns 1)
+            #use swap function to swap number 
+            #set light to off because list is not sorted 
+            #move right 
+        #if cur number is less than the one ahead 
+            #move right 
+    #Start from begining index and run the while loop until sorted 
+        
 
     #Space is O(1) b/c we do all of the sorting in place of same array 
-    #Time O(n^2) b/c we will loop through until sorted 
+    #Time O(n) b/c we will loop through until sorted 
     def sort(self):
         """
         Sort the robot's list.
@@ -21,39 +33,44 @@ class SortingRobot:
         #We must first set the light to off. Equivalent to saying the list is not sorted.
         self.set_light_off()
         #While the list is not sorted we will tentatively assume that is is on this iteration. 
-        while not self.light_is_on():
+        while not self.light_is_on() == True:
             self.set_light_on()
-
-            #This if statement will only run if the list is sorted. If not we will hit the while loops 
-            if self.light_is_on == True:
-                pass  
-
             #15, 41, 58, 49
-            #41, 15, 58, 49
+            #None, 41, 48, 49 
+            #move to index 2
+            #Compare item 15 with index 2 item 
+            #its less than so move back to index 1 
+            #swap back 15 for None 
+            #move right 
             #While our pointer can move right on our list, 
             while self.can_move_right() == True:
+                #None is considered an item 
+                #when we swap the current position is changed to None value and assigns value to item. Like take item 
                 self.swap_item()
+                #move position to right one index 
                 self.move_right()
+                #if self._item is greater than the position item we are at 
                 if self.compare_item() == 1:
                     self.swap_item() 
                     self.set_light_off
-                
+                    
+                #always need to move back an index to swap out the None with our item 
                 self.move_left()
                 self.swap_item()
                 self.move_right()
 
-            #if we can move left that means that the list is still not sorted 
+            #if we hit this while loop and move left, we are at the end of the list 
             #15, 41, 58, 49
-            #41, 15, 58, 49
-            while self.can_move_left():
-                self.swap_item()
-                self.move_left()
+            #15, 41, 49, 58
+            while self.can_move_left() == True:
+                self.swap_item() #take item 
+                self.move_left() #move index over to left one 
 
-                #if the cur item value is less than the one ahead going in left direction 
+                #if the cur held item value is less than the one we are at 
                 if self.compare_item() == -1:
                     self.swap_item()
                     self.set_light_off()
-                
+            
                 self.move_right()
                 self.swap_item()
                 self.move_left()
